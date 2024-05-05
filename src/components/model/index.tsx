@@ -10,6 +10,7 @@ interface ModelProps {
   styles?: string;
   loading?: boolean;
   title?: string;
+  isCollapsable?: boolean;
 }
 
 const Model: React.FC<ModelProps> = (props) => {
@@ -23,7 +24,7 @@ const Model: React.FC<ModelProps> = (props) => {
     config: { duration: 300 }
   });
 
-  useOnClickOutside(modalRef, () => setShow(false));
+  useOnClickOutside(modalRef, () => props.isCollapsable && setShow(false));
 
   return transitions(
     (style, item) =>
@@ -35,17 +36,16 @@ const Model: React.FC<ModelProps> = (props) => {
           }}
           className="fixed h-full top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50 w-full"
         >
+           
           <animated.div
             style={style}
             className={`absolute bg-base-400 rounded-lg shadow-md ${styles}`}
             ref={modalRef}
           >
-            <div className="flex flex-col">
-              {props.title && (
-                <div className="p-4 flex justify-between">
-                  {props.title}
-                  <CrossIcon
-                  />
+            <div className="flex flex-col relative">
+              {props.isCollapsable && (
+                <div className=" absolute top-4 right-4 text-white p-2 rounded-full bg-black">
+                  <CrossIcon onClick={() => setShow(false)}/>
                 </div>
               )}
               {children}
