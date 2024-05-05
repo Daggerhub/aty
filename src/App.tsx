@@ -1,14 +1,14 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Login from './pages/login';
-import Register from './pages/register';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Posts from "./pages/posts";
+import AuthPage from "./pages/auth";
 
 function App() {
   return (
-    <div className='bg-base-800 h-screen'>
+    <div className="h-full bg-base-800">
       <BrowserRouter>
         <Routes>
-          <Route element={<Login />} path='/login' />
-          <Route element={<Register />} path='/register' />
+          <Route element={<AuthPage />} path="/auth" />
+          <Route element={<Posts />} path="/" />
         </Routes>
       </BrowserRouter>
     </div>
